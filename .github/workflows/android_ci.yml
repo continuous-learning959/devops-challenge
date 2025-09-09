@@ -42,10 +42,10 @@ jobs:
     #   run: ./gradlew dependencyCheckAnalyze --info --no-daemon || true
 
     - name: Run Unit Tests
-      run: ./gradlew testDebugUnitTest --no-daemon || true
+      run: ./gradlew testDebugUnitTest --no-daemon
 
     - name: Generate Jacoco Report
-      run: ./gradlew jacocoTestReport --no-daemon || true
+      run: ./gradlew jacocoTestReport --no-daemon
 
     - name: Lint Analysis (Safe)
       run: ./gradlew lintDebug --no-daemon --continue
