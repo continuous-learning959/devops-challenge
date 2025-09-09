@@ -15,6 +15,7 @@ repositories {
 }
 
 android {
+    namespace 'codepath.demos.helloworlddemo'
     compileSdk 32
 
     defaultConfig {
