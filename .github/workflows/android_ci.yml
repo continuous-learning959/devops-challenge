@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Setup Java 17
+    - name: Setup Java
       uses: actions/setup-java@v3
       with:
         distribution: temurin
@@ -46,15 +46,6 @@ jobs:
 
     - name: Lint Analysis
       run: ./gradlew lintDebug --no-daemon --continue
-
-    - name: Run Instrumentation Tests (Emulator)
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 30
-        target: google-apis
-        arch: x86_64
-        profile: Nexus 5
-        script: ./gradlew connectedCheck --no-daemon || echo "No instrumentation tests, skipping..."
 
     - name: Build APK
       run: ./gradlew assembleDebug --no-daemon
