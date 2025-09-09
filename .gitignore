@@ -1,10 +1,4 @@
-*.iml
-.gradle
-/local.properties
-.idea/*
-!.idea/copyright
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-ktlint
+.idea/
+.gradle/
+build/
+local.properties

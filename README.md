@@ -57,3 +57,21 @@ After this, the pipeline is automatically triggered. It is possible to track the
 - Jacoco report: Coverage reports are generated as HTML file for inspection.
 
 - APK and AAB files are uploaded as artifacts in GitHub Actions
+
+## Artifact Locations
+
+- APK: app/build/outputs/apk/debug/app-debug.apk
+
+- AAB: app/build/outputs/bundle/release/app-release.aab
+
+- Jacoco Report: app/build/reports/jacoco/jacocoTestReport/html/index.html
+
+- Lint Report: app/build/reports/lint-results-debug.html
+
+## Development History & Pivot Decision
+
+This repository originally started with a more complex Android architecture based on the Sunflower project. After multiple attempts to integrate CI/CD workflows and resolve dependency and build issues, a strategic decision was made to pivot to a simpler and more stable template.
+
+The goal of this pivot was to ensure clarity, maintainability, and full compliance with the technical challenge requirements, including CI/CD automation, security validation, and Firebase deployment.
+
+All previous commits have been preserved to reflect the development journey and demonstrate the effort invested in solving the original architecture.
