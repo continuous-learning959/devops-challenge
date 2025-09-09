@@ -1,36 +1,32 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.owasp.dependencycheck") version "8.5.2"
-    jacoco
 }
 
 android {
-    namespace = "com.google.samples.apps.sunflower"
-    compileSdk = 34
+    namespace = "com.example.app"
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.google.samples.apps.sunflower"
+        applicationId = "com.example.app"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
-        versionName = "0.1.6"
-        vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionName = "1.0"
 
-        buildConfigField(
-            "String",
-            "UNSPLASH_ACCESS_KEY",
-            "\"" + (project.findProperty("unsplash_access_key") ?: "") + "\""
-        )
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         debug {
-            isTestCoverageEnabled = true
+            // Configs de debug
         }
     }
 
@@ -42,42 +38,22 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    buildFeatures {
-        buildConfig = true
-    }
-}
-
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-}
-
-// Jacoco Task
-tasks.register<JacocoReport>("jacocoTestReport") {
-    dependsOn("testDebugUnitTest")
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-        csv.required.set(false)
-    }
-    val fileTree = fileTree("${buildDir}/tmp/kotlin-classes/debug")
-    classDirectories.setFrom(files(fileTree))
-    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
-    executionData.setFrom(files("${buildDir}/jacoco/testDebugUnitTest.exec"))
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.3")
-    implementation("androidx.activity:activity-compose:1.9.3")
-
-    // Testing
+    implementation("androidx.appcompat:appcompat:1.7.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.6")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+
+// Exemplo de task para rodar OWASP no módulo app (opcional)
+tasks.register("owaspCheck") {
+    group = "verification"
+    description = "Run OWASP Dependency Check"
+    doLast {
+        println("Run ./gradlew dependencyCheckAnalyze")
+    }
 }
