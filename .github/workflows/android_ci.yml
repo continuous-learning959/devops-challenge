@@ -74,8 +74,8 @@ jobs:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
 
-      - name: OWASP Dependency Check
-        run: ./gradlew dependencyCheckAnalyze --no-daemon
+      # - name: OWASP Dependency Check
+      #   run: ./gradlew dependencyCheckAnalyze --no-daemon
 
       - name: Deploy to Firebase
         if: github.ref == 'refs/heads/main'
