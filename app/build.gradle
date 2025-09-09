@@ -17,12 +17,12 @@ repositories {
 
 android {
     namespace 'codepath.demos.helloworlddemo'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         applicationId System.env.APP_PACKAGE_NAME ?: "codepath.demos.helloworlddemo"
         minSdk 24
-        targetSdk 32
+        targetSdk 34
         versionCode getVersionCode()
         versionName System.env.APP_VERSION_NAME ?: "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -84,4 +84,8 @@ tasks.register("jacocoTestReport", JacocoReport) {
 dependencies {
     implementation "androidx.core:core-ktx:1.8.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "androidx.test:core:1.5.0"
+    testImplementation "androidx.test.ext:junit:1.1.5"
 }
