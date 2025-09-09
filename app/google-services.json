@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "760927315788",
-    "project_id": "devops-challenge-eldorado",
-    "storage_bucket": "devops-challenge-eldorado.firebasestorage.app"
+    "project_number": "191829024071",
+    "project_id": "devops-challenge-3f823",
+    "storage_bucket": "devops-challenge-3f823.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:760927315788:android:4cf9876f960afc587fd1e9",
+        "mobilesdk_app_id": "1:191829024071:android:04947193ee4f2bab934062",
         "android_client_info": {
-          "package_name": "com.google.samples.apps.sunflower"
+          "package_name": "codepath.demos.helloworlddemo.staging"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAZaw4PIbGzrBjGKcmW9BjW0uLfOJcb_jU"
+          "current_key": "AIzaSyDesOLld8knGwaFTCGmIQSDhPp3aElYfdQ"
         }
       ],
       "services": {
