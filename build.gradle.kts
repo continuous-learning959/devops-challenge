@@ -19,10 +19,6 @@ plugins {
 }
 
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
     dependencies {
         // Gradle Plugin Android
         classpath("com.android.tools.build:gradle:8.1.0")
@@ -30,12 +26,5 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
         // Hilt
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.49")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
     }
 }

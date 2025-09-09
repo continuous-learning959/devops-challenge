@@ -30,5 +30,5 @@ dependencyResolutionManagement {
   }
 }
 
+rootProject.name = "eldorado-devops-challenge4"
 include(":app")
-include(":macrobenchmark")
