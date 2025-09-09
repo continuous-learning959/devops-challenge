@@ -70,7 +70,7 @@ After this, the pipeline is automatically triggered. It is possible to track the
 
 ## Development History & Pivot Decision
 
-This repository originally started with a more complex Android architecture based on the Sunflower project. After multiple attempts to integrate CI/CD workflows and resolve dependency and build issues, a strategic decision was made to pivot to a simpler and more stable template.
+This repository originally started with a more complex Android architecture based on the Sunflower project. After multiple attempts to integrate CI/CD workflows and resolve dependency and build issues, I decided to pivot to a simpler and more stable template.
 
 The goal of this pivot was to ensure clarity, maintainability, and full compliance with the technical challenge requirements, including CI/CD automation, security validation, and Firebase deployment.
 
