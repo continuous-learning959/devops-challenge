@@ -57,12 +57,21 @@ import com.google.samples.apps.sunflower.ui.SunflowerTheme
 import com.google.samples.apps.sunflower.viewmodels.PlantListViewModel
 import kotlinx.coroutines.launch
 
-enum class SunflowerPage(
-    @StringRes val titleResId: Int,
-    @DrawableRes val drawableResId: Int
-) {
-    MY_GARDEN(R.string.my_garden_title, R.drawable.ic_my_garden_active),
-    PLANT_LIST(R.string.plant_list_title, R.drawable.ic_plant_list_active)
+enum class SunflowerPage {
+    MY_GARDEN,
+    PLANT_LIST;
+
+    @StringRes
+    fun titleResId(): Int = when (this) {
+        MY_GARDEN -> R.string.my_garden_title
+        PLANT_LIST -> R.string.plant_list_title
+    }
+
+    @DrawableRes
+    fun drawableResId(): Int = when (this) {
+        MY_GARDEN -> R.drawable.ic_my_garden_active
+        PLANT_LIST -> R.drawable.ic_plant_list_active
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -111,14 +120,14 @@ fun HomePagerScreen(
             selectedTabIndex = pagerState.currentPage
         ) {
             pages.forEachIndexed { index, page ->
-                val title = stringResource(id = page.titleResId)
+                val title = stringResource(id = page.titleResId())
                 Tab(
                     selected = pagerState.currentPage == index,
                     onClick = { coroutineScope.launch { pagerState.animateScrollToPage(index) } },
                     text = { Text(text = title) },
                     icon = {
                         Icon(
-                            painter = painterResource(id = page.drawableResId),
+                            painter = painterResource(id = page.drawableResId()),
                             contentDescription = title
                         )
                     },
