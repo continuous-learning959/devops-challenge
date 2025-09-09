@@ -54,6 +54,15 @@ dependencies {
     implementation("androidx.compose.material:material:1.6.0")
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.0")
 
+    // Compose Material3
+    implementation("androidx.compose.material3:material3:1.2.1")
+
+    // Compose Foundation 
+    implementation("androidx.compose.foundation:foundation:1.6.0")
+
+    // Hilt navigation Compose 
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
 
