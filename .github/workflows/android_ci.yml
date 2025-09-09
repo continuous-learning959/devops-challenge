@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Clean Gradle cache
+        run: rm -rf ~/.gradle/caches/
 
       - name: Setup Java
         uses: actions/setup-java@v3
