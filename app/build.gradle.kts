@@ -1,9 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.dagger.hilt.android")
-    jacoco
     id("org.owasp.dependencycheck") version "8.5.2"
+    jacoco
 }
 
 android {
@@ -16,14 +15,21 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "0.1.6"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "UNSPLASH_ACCESS_KEY",
+            "\"" + (project.findProperty("unsplash_access_key") ?: "") + "\""
+        )
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
         }
-        getByName("debug") {
+        debug {
             isTestCoverageEnabled = true
         }
     }
@@ -36,6 +42,16 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 // Jacoco Task
@@ -53,23 +69,15 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 }
 
 dependencies {
-    // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
-    
-    // Hilt
-    implementation("com.google.dagger:hilt-android:2.49")
-    kapt("com.google.dagger:hilt-android-compiler:2.49")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
-    // AndroidX Core
     implementation("androidx.core:core-ktx:1.12.0")
-
-    // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.3")
+    implementation("androidx.activity:activity-compose:1.9.3")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.6")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.49")
 }
