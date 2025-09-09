@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.jvm")
     id("jacoco")
     // id("org.owasp.dependencycheck") // commented to avoid errors
 }
@@ -75,4 +76,8 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 
     sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
     classDirectories.setFrom(files("${buildDir}/tmp/kotlin-classes/debug"))
+}
+
+kotlin {
+    jvmToolchain(17)
 }
