@@ -12,10 +12,23 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.owasp.dependencycheck" version "10.0.4"
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
+    }
+}
+
+dependencyCheck {
+    failBuildOnCVSS = 7
+    suppressionFile = 'dependency-check-suppressions.xml'
+    analyzers {
+        assemblyEnabled = false
+        nodeEnabled = false
     }
 }
