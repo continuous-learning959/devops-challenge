@@ -14,23 +14,28 @@
  * limitations under the License.
  */
 
+plugins {
+    jacoco
+}
+
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
+    dependencies {
+        // Gradle Plugin Android
+        classpath("com.android.tools.build:gradle:8.1.0")
+        // Kotlin
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
+        // Hilt
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.49")
+    }
 }
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.hilt) apply false
-    alias(libs.plugins.spotless)
-    alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.android.test) apply false
-    alias(libs.plugins.gradle.versions)
-    alias(libs.plugins.version.catalog.update)
-    alias(libs.plugins.compose.compiler)
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
-
-apply("${project.rootDir}/buildscripts/toml-updater-config.gradle")
