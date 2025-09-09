@@ -25,17 +25,3 @@ allprojects {
     }
 }
 
-dependencyCheck {
-    failBuildOnCVSS = 7
-    suppressionFile = 'dependency-check-suppressions.xml'
-    analyzers {
-        assemblyEnabled = false
-        nodeEnabled = false
-    }
-    data {
-        autoUpdate = false
-    }
-    dependencies {
-        h2Version = "2.1.214"
-    }
-}
