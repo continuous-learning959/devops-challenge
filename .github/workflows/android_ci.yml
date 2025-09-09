@@ -9,9 +9,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Clean Gradle cache
-        run: rm -rf ~/.gradle/caches/
 
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -69,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report
-          path: app/build/reports/jacoco/jacocoTestReport
+          path: app/build/reports/jacoco/testDebugUnitTest/html/
 
       - name: Upload Lint
         uses: actions/upload-artifact@v4
