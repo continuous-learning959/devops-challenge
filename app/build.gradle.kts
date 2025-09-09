@@ -94,8 +94,6 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     classDirectories.setFrom(files("${buildDir}/tmp/kotlin-classes/debug"))
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+kotlin {
+    jvmToolchain(17)
 }
