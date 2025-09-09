@@ -10,18 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1️⃣ Checkout
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # 2️⃣ Setup Java 17 (resolve problema do SDK)
     - name: Setup Java
       uses: actions/setup-java@v3
       with:
         distribution: temurin
         java-version: 17
 
-    # 3️⃣ Setup Android SDK
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
       with:
@@ -29,7 +26,6 @@ jobs:
         build-tools: 33.0.2
         emulator: false
 
-    # 4️⃣ Cache Gradle
     - name: Cache Gradle
       uses: actions/cache@v4
       with:
@@ -38,50 +34,23 @@ jobs:
           ~/.gradle/wrapper
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-    # 5️⃣ Grant execute permissions
     - name: Grant Execute Permissions
       run: chmod +x gradlew
 
-    # 6️⃣ Run Unit Tests
     - name: Run Unit Tests
       run: ./gradlew testDebugUnitTest --no-daemon || true
 
-    # 7️⃣ Generate Jacoco Report
     - name: Generate Jacoco Report
       run: ./gradlew jacocoTestReport --no-daemon || true
 
-    # 8️⃣ Lint Analysis
     - name: Lint Analysis
       run: ./gradlew lintDebug --no-daemon --continue
 
-    # 9️⃣ Build APK & AAB
     - name: Build APK
       run: ./gradlew assembleDebug --no-daemon
 
-    - name: Build AAB
-      run: ./gradlew bundleRelease --no-daemon
-
-    # 🔟 Upload artifacts
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug-apk
         path: app/build/outputs/apk/debug/app-debug.apk
-
-    - name: Upload AAB
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-release-aab
-        path: app/build/outputs/bundle/release/app-release.aab
-
-    - name: Upload Jacoco Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: jacoco-report
-        path: app/build/reports/jacoco/jacocoTestReport
-
-    - name: Upload Lint Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: lint-report
-        path: app/build/reports/lint-results-debug.html
