@@ -78,10 +78,9 @@ jobs:
       #   run: ./gradlew dependencyCheckAnalyze --no-daemon
 
       - name: Deploy to Firebase
-        if: github.ref == 'refs/heads/main'
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           groups: testers
           file: app/build/outputs/apk/debug/app-debug.apk
