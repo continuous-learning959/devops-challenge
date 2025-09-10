@@ -38,8 +38,6 @@ android {
         debug {
             debuggable true
             minifyEnabled false
-            applicationIdSuffix ".staging"
-            versionNameSuffix "-S"
             resValue "string", "app_name", "staging boiler"
         }
     }
