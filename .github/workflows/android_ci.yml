@@ -74,8 +74,21 @@ jobs:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
 
-      # - name: OWASP Dependency Check
-      #   run: ./gradlew dependencyCheckAnalyze --no-daemon
+      - name: Run Snyk Security Scan
+        run: snyk test --file=app/build.gradle
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Save Snyk Report
+        run: snyk test --file=app/build.gradle --json > snyk-report.json
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Upload Snyk Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-report
+          path: snyk-report.json
 
       - name: Deploy with Firebase CLI
         run: |
