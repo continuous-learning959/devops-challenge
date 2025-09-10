@@ -75,3 +75,7 @@ This repository originally started with a more complex Android architecture base
 The goal of this pivot was to ensure clarity, maintainability, and full compliance with the technical challenge requirements, including CI/CD automation, security validation, and Firebase deployment.
 
 All previous commits have been preserved to reflect the development journey and demonstrate the effort invested in solving the original architecture.
+
+### Succesful Execution Screenshot
+
+![alt text](image.png)
