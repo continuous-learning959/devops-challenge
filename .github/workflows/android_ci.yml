@@ -75,8 +75,9 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Run Snyk Security Scan
-        run: snyk test --file=app/build.gradle || echo "Snyk scan completed with issues"
+      - name: Run Snyk Security Scan (critical only)
+        run: |
+          snyk test --file=app/build.gradle --severity-threshold=critical --json > snyk-report.json
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
