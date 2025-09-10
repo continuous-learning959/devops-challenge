@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'jacoco'
-
 }
 
 def getVersionCode = { ->
@@ -68,26 +67,53 @@ jacoco {
 tasks.register("jacocoTestReport", JacocoReport) {
     dependsOn("testDebugUnitTest")
 
+    def javaClasses = fileTree(dir: "$buildDir/intermediates/javac/debug", excludes: [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*'
+    ])
+
+    def kotlinClasses = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: [
+        '**/R.class',
+        '**/R$*.class',
+        '**/BuildConfig.*',
+        '**/Manifest*.*'
+    ])
+
     reports {
         xml.required.set(true)
         html.required.set(true)
     }
 
     sourceDirectories.setFrom(files([
-        "$projectDir/src/main/java"
+        "$projectDir/src/main/java",
+        "$projectDir/src/main/kotlin"
     ]))
-    classDirectories.setFrom(files([
-        "$buildDir/tmp/kotlin-classes/debug"
+
+    classDirectories.setFrom(files([javaClasses, kotlinClasses]))
+    additionalClassDirs.setFrom(files([javaClasses, kotlinClasses]))
+    additionalSourceDirs.setFrom(files([
+        "$projectDir/src/main/java",
+        "$projectDir/src/main/kotlin"
     ]))
+
     executionData.setFrom(fileTree(buildDir).include("**/jacoco/testDebugUnitTest.exec"))
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+            details.useVersion '1.9.0'
+        }
+    }
 }
 
 dependencies {
     implementation "androidx.core:core-ktx:1.12.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0"
-    
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0"
+
     testImplementation "junit:junit:4.13.2"
     testImplementation "androidx.test:core:1.5.0"
     testImplementation "androidx.test.ext:junit:1.1.5"
-    
 }
