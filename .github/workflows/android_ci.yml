@@ -84,9 +84,10 @@ jobs:
           name: snyk-report
           path: snyk-report.json
 
-      - name: Deploy with Firebase CLI
-        run: |
-          npm install -g firebase-tools
-          firebase appdistribution:distribute app/build/outputs/apk/debug/app-debug.apk \
-            --app ${{ secrets.FIREBASE_APP_ID }} \
-            --groups testers
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: app/build/outputs/apk/debug/app-debug.apk
